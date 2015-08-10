@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+  layout:decorator="layout">
+<head>
+<title>Sample Form</title>
+<script type="text/javascript" th:src="@{/js/view/sampleform.js}" src="../static/js/view/sampleform.js"></script>
+</head>
+<body>
+  <div layout:fragment="content">
+    <h4>Sample Form</h4>
+    <div class="table-responsive">
+    
+      <table th:each="instance : ${dailySummary.dailyMap}" class="table table-bordered table-condensed table-hover">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Type</th>
+            <th>Recipient</th>
+            <th class="text-right">Bank</th>
+            <th class="text-right">Visa</th>
+            <th class="text-right">Budget</th>
+            <th class="text-right">Running Total</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:each="entry, status : ${instance.value.entries}">
+            <td th:text="${status.index} == 0 ? ${#calendars.format(entry.authorizationDate,'MM/dd/yyyy')}"></td>
+            <td th:text="${entry.type}"></td>
+            <td th:text="${entry.recipient}"></td>
+            <td class="text-right"><span th:text="${entry.accountName} == 'checking' ? ${entry.amount}" class="currency-field"></span></td>
+            <td class="text-right"><span th:text="${entry.accountName} == 'visa' ? ${entry.amount}" class="currency-field"></span></td>
+            <td></td>
+            <td></td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td class="active"></td>
+            <td class="active"></td>
+            <td class="active"></td>
+            <td class="text-right active"><span th:text="${instance.value.total.bank}" class="currency-field">3209.90</span></td>
+            <td class="text-right active"><span th:text="${instance.value.total.visa}" class="currency-field">3209.90</span></td>
+            <td class="text-right active"><span th:text="${instance.value.total.budget}" class="currency-field">3209.90</span></td>
+            <td class="text-right active"><span th:text="${instance.value.total.running}" class="currency-field">3209.90</span></td>
+          </tr>
+        </tfoot>
+      </table>
+    
+      <!-- 
+      <table class="table table-bordered table-condensed table-hover">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Type</th>
+            <th>Recipient</th>
+            <th>Bank</th>
+            <th>Visa</th>
+            <th>Budget</th>
+            <th>Running Total</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:each="entry : ${entries}">
+            <td th:text="${#calendars.format(entry.authorizationDate,'MMM dd yyyy')}"></td>
+            <td th:text="${entry.type}"></td>
+            <td th:text="${entry.recipient}"></td>
+            <td class="text-right"><span th:text="${entry.accountName} == 'checking' ? ${entry.amount}" class="currency-field"></span></td>
+            <td class="text-right"><span th:text="${entry.accountName} == 'visa' ? ${entry.amount}" class="currency-field"></span></td>
+            <td></td>
+            <td></td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>3209.90</td>
+            <td>1835.90</td>
+            <td>90.00</td>
+          </tr>
+        </tfoot>
+      </table>
+       -->
+    </div>
+  </div>
+</body>
+</html>

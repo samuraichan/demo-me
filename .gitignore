@@ -1,0 +1,23 @@
+.metadata
+.classpath
+.settings
+.project
+.iml
+./idea
+
+# Mac OSX specific
+.DS_Store
+
+# This gets added by STS and should be ignored
+Servers
+RemoteSystemsTempFiles
+
+**/target
+**/maven-eclipse.xml
+**/.externalToolBuilders
+**/.settings
+**/.classpath
+**/.project
+**/.springBeans
+
+**/rebel.xml

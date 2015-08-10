@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+  layout:decorator="layout">
+<head>
+<title>Sample Form</title>
+<script type="text/javascript" th:src="@{/js/view/sampleform.js}"
+  src="../static/js/view/sampleform.js"></script>
+</head>
+<body>
+  <div layout:fragment="content">
+    <h4>Sample Form</h4>
+    <form th:action="@{/sample/validate}" class="form-frm" method="post">
+      <div>
+        <input type="text" name="name" placeholder="Your Name" />
+      </div>
+      <br />
+      <div>
+        <input type="text" name="email" placeholder="Your Email" />
+      </div>
+      <br />
+      <div>
+        <input type="text" name="number" placeholder="A Currency Field"
+          class="currency-field" />
+      </div>
+      <br />
+      <div>
+        <input type="text" name="number" placeholder="A date Field"
+          class="date-field" />
+      </div>
+
+      <div class="div-vehicles"></div>
+
+      <button type="button" class="btn-add"
+        style="margin-top: 10px; margin-bottom: 10px">Add
+        Another Vehicle</button>
+
+      <div>
+        <div>
+          <label>Comments:</label>
+        </div>
+        <textarea name="comment" rows="4" cols="50"></textarea>
+      </div>
+      <br />
+      <div style="display: none; margin-bottom: 10px;"
+        class="div-attach">
+        <h4>Attached File(s)</h4>
+      </div>
+      <input type="submit" />
+    </form>
+    <br /> <br />
+    <div class="table-responsive">
+      <table class="table table-bordered table-condensed table-hover">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Type</th>
+            <th>Recipient</th>
+            <th>Bank</th>
+            <th>Visa</th>
+            <th>Budget</th>
+            <th>Running Total</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr data-toggle="modal" data-target=".bs-example-modal-sm">
+            <td>2015-07-12</td>
+            <td>BILL</td>
+            <td>Seneca</td>
+            <td>1703.90</td>
+            <td></td>
+            <td>529.90</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>2015-07-12</td>
+            <td>POS</td>
+            <td>Toyota</td>
+            <td></td>
+            <td>324.90</td>
+            <td>829.90</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>2015-07-12</td>
+            <td>POS</td>
+            <td>Subway</td>
+            <td></td>
+            <td>6.29</td>
+            <td>835.90</td>
+            <td></td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>3209.90</td>
+            <td>1835.90</td>
+            <td>90.00</td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+    <div sec:authorize="hasAuthority('FILE_UPLOAD')">
+      <div id="filelist"></div>
+      <br />
+      <div id="container">
+        <a id="pickfiles" href="javascript:;">[Select files]</a> <a
+          id="uploadfiles" href="javascript:;">[Upload files]</a>
+      </div>
+      <br />
+      <pre id="console"></pre>
+    </div>
+    <fieldset style="margin-top: 10px; width: 35%; display: none;">
+      <legend>
+        Vehicle #<span class="span-num">1</span> Info
+      </legend>
+      <div style="float: left;">
+        <input type="text" style="width: 170px;"
+          name="vehicles[0].acquired"
+          placeholder="date acquired (mm/dd/yyyy)" />
+      </div>
+      <div style="float: right; display: none;">
+        <button type="button" class="btn-delete">Delete</button>
+      </div>
+      <div style="clear: both;"></div>
+      <br />
+      <div>
+        <select name="vehicles[0].make">
+          <option>Select Make</option>
+          <option value="Honda">Honda</option>
+          <option value="Ford">Ford</option>
+          <option value="Toyota">Toyota</option>
+          <option value="Nissan">Nissan</option>
+          <option value="Lexus">Lexus</option>
+        </select>
+      </div>
+      <br />
+      <div>
+        <input type="text" name="vehicles[0].model" placeholder="model" />
+      </div>
+      <br />
+      <div>
+        <input type="text" name="vehicles[0].mileage"
+          placeholder="Mileage" />
+      </div>
+      <br />
+      <div>
+        <div>
+          <label>Primary Uses</label>
+        </div>
+        <input type="checkbox" name="vehicles[0].uses" value="Work" />Work<br />
+        <input type="checkbox" name="vehicles[0].uses" value="School" />School<br />
+        <input type="checkbox" name="vehicles[0].uses"
+          value="Recreation" />Recreation<br />
+      </div>
+      <br />
+      <div>
+        <div>
+          <label>Do you own this vehicle?</label>
+        </div>
+        <input type="radio" name="vehicles[0].owned" value="yes" />Y<br />
+        <input type="radio" name="vehicles[0].owned" value="no" />N
+      </div>
+    </fieldset>
+    <!-- Large modal -->
+    <button type="button" class="btn btn-primary btn-modal">Large modal</button>
+
+    <div class="modal fade bs-example-modal-lg" tabindex="-1"
+      role="dialog" aria-labelledby="myLargeModalLabel">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">...</div>
+      </div>
+    </div>
+
+    <!-- Small modal -->
+    <a type="button" class="btn btn-primary" >Small modal</a>
+
+    <div class="modal fade bs-example-modal-sm" tabindex="-1"
+      role="dialog" aria-labelledby="mySmallModalLabel">
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">...</div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

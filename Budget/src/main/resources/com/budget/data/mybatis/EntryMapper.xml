@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.budget.data.mapper.EntryMapper">
+
+	
+  <select id="findAllEntriesByRange" parameterType="java.lang.Integer" resultType="com.budget.data.jpa.domain.Entry">
+	SELECT 
+		id AS id,
+		authorization_date AS authorizationDate,
+		recipient AS recipient,
+		amount AS amount,
+		entry_type AS type, 
+    account_name AS accountName
+	FROM
+		entry
+  WHERE
+    authorization_date &gt;= CURRENT_DATE - #{days} DAY
+  </select>
+  
+  <select id="findAllDailyTotalsByRange" parameterType="java.lang.Integer" resultType="com.budget.data.jpa.domain.DailyTotal">
+  SELECT 
+    id AS id,
+    total_date AS totalDate,
+    bank AS bank,
+    visa AS visa,
+    budget AS budget, 
+    running AS running
+  FROM
+    daily_total
+  WHERE
+    total_date &gt;= CURRENT_DATE - #{days} DAY
+  </select>
+
+</mapper>
