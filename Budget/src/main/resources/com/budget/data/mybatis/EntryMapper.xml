@@ -6,15 +6,15 @@
 
 	
   <select id="findAllEntriesByRange" parameterType="java.lang.Integer" resultType="com.budget.data.jpa.domain.Entry">
-	SELECT 
-		id AS id,
-		authorization_date AS authorizationDate,
-		recipient AS recipient,
-		amount AS amount,
-		entry_type AS type, 
+  SELECT
+    id AS id,
+    authorization_date AS authorizationDate,
+    recipient AS recipient,
+    amount AS amount,
+    entry_type AS type,
     account_name AS accountName
-	FROM
-		entry
+  FROM
+    entry
   WHERE
     authorization_date &gt;= CURRENT_DATE - #{days} DAY
   </select>
@@ -26,7 +26,7 @@
     bank AS bank,
     visa AS visa,
     budget AS budget, 
-    running AS running
+    allotment AS allotment
   FROM
     daily_total
   WHERE

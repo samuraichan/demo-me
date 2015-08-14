@@ -33,15 +33,15 @@ public class DailyTotal implements Serializable {
   private Double budget;
   
   @Column(precision=10, scale=2)
-  private Double running;
+  private Double allotment;
   
   public DailyTotal() {}
   
-  public DailyTotal(Date totalDate, Double bank, Double visa, Double budget, Double running) {
+  public DailyTotal(Date totalDate, Double bank, Double visa, Double budget, Double allotment) {
     this.totalDate = totalDate;
     this.bank = bank;
     this.visa = visa;
-    this.running = running;
+    this.allotment = allotment;
   }
 
   public Long getId() {
@@ -84,18 +84,18 @@ public class DailyTotal implements Serializable {
     this.budget = budget;
   }
 
-  public Double getRunning() {
-    return running;
+  public Double getAllotment() {
+    return allotment;
   }
 
-  public void setRunning(Double running) {
-    this.running = running;
+  public void setAllotment(Double allotment) {
+    this.allotment = allotment;
   }
 
   @Override
   public String toString() {
     return "DailyTotal [id=" + id + ", totalDate=" + totalDate + ", bank="
         + bank + ", visa=" + visa + ", budget=" + budget + ", running="
-        + running + "]";
+        + allotment + "]";
   }
 }

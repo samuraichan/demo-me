@@ -29,7 +29,7 @@ public class WebController {
       System.out.println(dailyTotal);
     }
 
-    return "so what is for ";
+    return "so what is for nothing";
   }
 
   @RequestMapping(value = "/sample", method = RequestMethod.GET)
@@ -39,7 +39,7 @@ public class WebController {
   
   @RequestMapping(value = "/daily", method = RequestMethod.GET)
   public String getDaily(Model model) {
-    model.addAttribute("dailySummary", entryService.findEntyDetailByRange(11));
+    model.addAttribute("dailySummary", entryService.findEntyDetailByRange(12));
     return "daily";
   }
 }
