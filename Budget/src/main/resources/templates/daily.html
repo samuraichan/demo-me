@@ -1,18 +1,15 @@
 <!DOCTYPE html>
 
-<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-  xmlns:th="http://www.thymeleaf.org"
-  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
-  layout:decorator="layout">
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3" layout:decorator="layout">
 <head>
 <title>Sample Form</title>
-<script type="text/javascript" th:src="@{/js/view/sampleform.js}" src="../static/js/view/sampleform.js"></script>
+<script type="text/javascript" th:src="@{/js/view/daily.js}" src="../static/js/view/dialy.js"></script>
 </head>
 <body>
   <div layout:fragment="content">
     <h4>Sample Form</h4>
     <div class="table-responsive">
-    
+
       <table th:each="instance : ${dailySummary.dailyMap}" class="table table-bordered table-condensed table-hover">
         <thead>
           <tr>
@@ -22,11 +19,11 @@
             <th class="text-right">Bank</th>
             <th class="text-right">Visa</th>
             <th class="text-right">Budget</th>
-            <th class="text-right">Running Total</th>
+            <th class="text-right">Allotment</th>
           </tr>
         </thead>
         <tbody>
-          <tr th:each="entry, status : ${instance.value.entries}">
+          <tr class="entry-row" th:each="entry, status : ${instance.value.entries}" data-toggle="modal" data-target=".entry-dialog">
             <td th:text="${status.index} == 0 ? ${#calendars.format(entry.authorizationDate,'MM/dd/yyyy')}"></td>
             <td th:text="${entry.type}"></td>
             <td th:text="${entry.recipient}"></td>
@@ -44,48 +41,46 @@
             <td class="text-right active"><span th:text="${instance.value.total.bank}" class="currency-field">3209.90</span></td>
             <td class="text-right active"><span th:text="${instance.value.total.visa}" class="currency-field">3209.90</span></td>
             <td class="text-right active"><span th:text="${instance.value.total.budget}" class="currency-field">3209.90</span></td>
-            <td class="text-right active"><span th:text="${instance.value.total.running}" class="currency-field">3209.90</span></td>
+            <td class="text-right active"><span th:text="${instance.value.total.allotment}" class="currency-field">3209.90</span></td>
           </tr>
         </tfoot>
       </table>
-    
-      <!-- 
-      <table class="table table-bordered table-condensed table-hover">
-        <thead>
-          <tr>
-            <th>Date</th>
-            <th>Type</th>
-            <th>Recipient</th>
-            <th>Bank</th>
-            <th>Visa</th>
-            <th>Budget</th>
-            <th>Running Total</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr th:each="entry : ${entries}">
-            <td th:text="${#calendars.format(entry.authorizationDate,'MMM dd yyyy')}"></td>
-            <td th:text="${entry.type}"></td>
-            <td th:text="${entry.recipient}"></td>
-            <td class="text-right"><span th:text="${entry.accountName} == 'checking' ? ${entry.amount}" class="currency-field"></span></td>
-            <td class="text-right"><span th:text="${entry.accountName} == 'visa' ? ${entry.amount}" class="currency-field"></span></td>
-            <td></td>
-            <td></td>
-          </tr>
-        </tbody>
-        <tfoot>
-          <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>3209.90</td>
-            <td>1835.90</td>
-            <td>90.00</td>
-          </tr>
-        </tfoot>
-      </table>
-       -->
+      
+      <div class="modal fade entry-dialog" tabindex="-1" role="dialog">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title">Modify Transaction</h4>
+            </div>
+            <div class="modal-body">
+              <form class="form">
+                <div class="form-group">
+                  <label for="type">TYPE</label>
+                  <input type="text" class="form-control" id="type" name="type"/>
+                </div>
+                <div class="form-group">
+                  <label for="type">RECIPIENT</label>
+                  <input type="text" class="form-control" id="recipient" name="recipient"/>
+                </div>
+                <div class="form-group bank">
+                  <label for="type">BANK</label>
+                  <input type="text" class="form-control currency-field" id="bank" name="bank"/>
+                </div>
+                <div class="form-group visa">
+                  <label for="type">VISA</label>
+                  <input type="text" class="form-control currency-field" id="visa" name="visa"/>
+                </div>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-default" data-dismiss="modal">Delete</button>
+              <button type="button" class="btn btn-primary">Save</button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </body>

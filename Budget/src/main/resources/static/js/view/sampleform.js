@@ -44,6 +44,6 @@ $(document).ready(function() {
   });
   
   $('.bs-example-modal-sm').on('show.bs.modal', function (e) {
-	  alert('duded');
+	  //alert('duded');
 	})
 });

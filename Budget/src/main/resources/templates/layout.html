@@ -1,46 +1,24 @@
 <!DOCTYPE html>
-<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-  xmlns:th="http://www.thymeleaf.org"
-  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 
 <head th:with="version=${@environment.getProperty('build.version')}">
 <title>Layout Parent</title>
-<th:block
-  th:if="${#arrays.contains(@environment.getActiveProfiles(),'dev')}">
-  <link rel="stylesheet"
-    href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" />
-  <link rel="stylesheet" th:href="@{/css/screen.css}"
-    href="../static/css/screen.css" />
-  <script type="text/javascript"
-    th:src="@{/js/thirdparty/jquery-1.11.2.min.js}"
-    src="../static/js/thirdparty/jquery-1.11.2.min.js"></script>
-  <script type="text/javascript"
-    th:src="@{/js/thirdparty/plupload.full.min.js}"
-    src="../static/js/thirdparty/plupload.full.min.js"></script>
-  <script type="text/javascript"
-    th:src="@{/js/thirdparty/jquery.formatcurrency.js}"
-    src="../static/js/thirdparty/jquery.formatcurrency.js"></script>
-  <script
-    src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-  <script type="text/javascript" th:src="@{/js/library/ere.ajax.js}"
-    src="../static/js/library/ere.ajax.js"></script>
-  <script type="text/javascript" th:src="@{/js/library/ere.core.js}"
-    src="../static/js/library/ere.core.js"></script>
-  <script type="text/javascript" th:src="@{/js/library/ere.forms.js}"
-    src="../static/js/library/ere.forms.js"></script>
-  <script type="text/javascript" th:src="@{/js/library/ere.ui.js}"
-    src="../static/js/library/ere.ui.js"></script>
-  <script type="text/javascript" th:src="@{/js/library/ere.upload.js}"
-    src="../static/js/library/ere.upload.js"></script>
+<th:block th:if="${#arrays.contains(@environment.getActiveProfiles(),'dev')}">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" />
+  <link rel="stylesheet" th:href="@{/css/screen.css}" href="../static/css/screen.css" />
+  <script type="text/javascript" th:src="@{/js/thirdparty/jquery-1.11.2.min.js}" src="../static/js/thirdparty/jquery-1.11.2.min.js"></script>
+  <script type="text/javascript" th:src="@{/js/thirdparty/plupload.full.min.js}" src="../static/js/thirdparty/plupload.full.min.js"></script>
+  <script type="text/javascript" th:src="@{/js/thirdparty/jquery.formatcurrency.js}" src="../static/js/thirdparty/jquery.formatcurrency.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+  <script type="text/javascript" th:src="@{/js/library/ere.ajax.js}" src="../static/js/library/ere.ajax.js"></script>
+  <script type="text/javascript" th:src="@{/js/library/ere.core.js}" src="../static/js/library/ere.core.js"></script>
+  <script type="text/javascript" th:src="@{/js/library/ere.forms.js}" src="../static/js/library/ere.forms.js"></script>
+  <script type="text/javascript" th:src="@{/js/library/ere.ui.js}" src="../static/js/library/ere.ui.js"></script>
+  <script type="text/javascript" th:src="@{/js/library/ere.upload.js}" src="../static/js/library/ere.upload.js"></script>
 </th:block>
-<th:block
-  th:unless="${#arrays.contains(@environment.getActiveProfiles(),'dev')}">
-  <script type="text/javascript"
-    th:src="@{/js/thirdparty/thirdparty.min.js?r=}+${version}"
-    src="../static/js/thirdparty/thirdparty.min.js"></script>
-  <script type="text/javascript"
-    th:src="@{/js/library/ere.library.min.js?r=}+${version}"
-    src="../static/js/library/ere.library.min.js"></script>
+<th:block th:unless="${#arrays.contains(@environment.getActiveProfiles(),'dev')}">
+  <script type="text/javascript" th:src="@{/js/thirdparty/thirdparty.min.js?r=}+${version}" src="../static/js/thirdparty/thirdparty.min.js"></script>
+  <script type="text/javascript" th:src="@{/js/library/ere.library.min.js?r=}+${version}" src="../static/js/library/ere.library.min.js"></script>
 </th:block>
 </head>
 <body>
