@@ -1,6 +1,7 @@
 package com.budget.data.jpa.domain;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -9,6 +10,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 public class Entry implements Serializable {
@@ -21,13 +24,14 @@ public class Entry implements Serializable {
   
   @Column(nullable = false, name="authorization_date")
   @Temporal(TemporalType.DATE) // allows insert statements to simply have a value of '2010-12-26' instead of doing a to_date for example
+  @DateTimeFormat(style="S-")
   private Date authorizationDate;
   
   @Column(nullable=false)
   private String recipient;
   
   @Column(nullable=false,precision=10, scale=2)
-  private Double amount;
+  private BigDecimal amount;
   
   @Column(nullable=false, name="entry_type")
   private String type;
@@ -37,7 +41,7 @@ public class Entry implements Serializable {
   
   public Entry() {}
   
-  public Entry(Date authorizationDate, String payee, Double amount, String type, String accountName) {
+  public Entry(Date authorizationDate, String payee, BigDecimal amount, String type, String accountName) {
     super();
     this.authorizationDate = authorizationDate;
     this.recipient = payee;
@@ -61,11 +65,11 @@ public class Entry implements Serializable {
     this.recipient = recipient;
   }
 
-  public Double getAmount() {
+  public BigDecimal getAmount() {
     return amount;
   }
 
-  public void setAmount(Double amount) {
+  public void setAmount(BigDecimal amount) {
     this.amount = amount;
   }
   

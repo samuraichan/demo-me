@@ -13,13 +13,15 @@ function AjaxObject(selector, options){
   options = $.extend({},{      
     type: "POST",
     data: {},
+    preProcess: null,
     callback: null,
     validationCallback: null,
     confirmText: null,
     bindClick: true,
     bindSubmit: true,
     target: null,
-    fieldLevelErrors: false
+    fieldLevelErrors: false,
+    element: $(selector)
   }, options);
   
   if(typeof element == 'undefined' || element.length <= 0){
@@ -50,6 +52,9 @@ function AjaxObject(selector, options){
     }
     if(blocked) return false;
     blocked = true;
+    
+    if(options.preProcess != null) options.preProcess();
+    
     if (element.prop("href") != null) {
       ajaxUrl = element.attr("href");
       $.each(element.data(), function(key, val){
@@ -60,6 +65,7 @@ function AjaxObject(selector, options){
       ajaxUrl = element.attr("action");  
       var formData = $(element).serialize()+"&"+$.param(options.data);
     }
+    
     $.ajax({
       type: options.type,
       url: ajaxUrl,

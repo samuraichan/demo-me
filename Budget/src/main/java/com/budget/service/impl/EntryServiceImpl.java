@@ -1,6 +1,10 @@
 package com.budget.service.impl;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+
+import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,8 +35,14 @@ public class EntryServiceImpl implements EntryService {
   }
 
   @Override
-  public void saveEntry(Entry entry) {
-    entryRepository.save(entry);
+  @Transactional
+  public Entry updateEntry(Entry entry) {
+    Entry updateEntry = entryRepository.findOne(entry.getId());
+    updateEntry.setAmount(entry.getAmount());
+    updateEntry.setRecipient(entry.getRecipient());
+    updateEntry.setType(entry.getType());
+    
+    return entryRepository.save(updateEntry);
   }
 
   @Override
@@ -56,5 +66,10 @@ public class EntryServiceImpl implements EntryService {
   @Override
   public List<DailyTotal> findAllDailyTotalsByRange(Integer days) {
     return entryDAO.findAllDailyTotalsByRange(days);
+  }
+
+  @Override
+  public DailyDetail findMonthToDateEntryDetails() {
+    return findEntyDetailByRange(Calendar.getInstance().get(Calendar.DAY_OF_MONTH));
   }
 }

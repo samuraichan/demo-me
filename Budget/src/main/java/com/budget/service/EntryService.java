@@ -14,9 +14,11 @@ public interface EntryService {
   
   public List<DailyTotal> findAllDailyTotalsByRange(Integer days);
   
-  public void saveEntry(Entry entry);
+  public Entry updateEntry(Entry entry);
   
   public List<Entry> findAllEntriesByRange(Integer days);
   
   public DailyDetail findEntyDetailByRange(Integer days);
+  
+  public DailyDetail findMonthToDateEntryDetails();
 }
